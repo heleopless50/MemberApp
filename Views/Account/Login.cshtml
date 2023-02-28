@@ -1,0 +1,212 @@
+﻿@using MemberApp.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+
+
+@* new html *@
+
+
+
+<!-- Main Content -->
+<div class="container-fluid">
+    <div class="row main-content bg-success text-center">
+        <div class="col-md-4 text-center company__info">
+            <span class="company__logo"><span><span class="fa fa-android"></span></span></span>
+            <h4 class="company_title">Members App</h4>
+        </div>
+        <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+            <div class="container-fluid">
+                <div class="row">
+                    <h2>Log In</h2>
+                </div>
+                <div class="row">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-group", role = "form" }))
+                    {
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.AntiForgeryToken()
+                        @*<form control="" class="form-group">*@
+                        <div class="row">
+
+
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form__input", placeholder = "Username" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+
+
+                            @*<input type="text" name="username" id="username" class="form__input" placeholder="Username">*@
+                        </div>
+                        <div class="row">
+
+                            @Html.PasswordFor(m => m.Password, new { @class = "form__input", placeholder = "Password" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+
+                            <span class="fa fa-lock"></span>
+
+                        </div>
+                        <div class="row">
+                            <input type="checkbox" name="remember_me" id="remember_me" class="">
+                            <label for="remember_me">Remember Me!</label>
+                        </div>
+                        <div class="row">
+
+                            <input type="submit" value="Login" class="btn">
+                        </div>
+
+
+
+                    }
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@* old html*@
+@*
+        <div class="row">
+            <div class="col-md-12">
+                <section id="loginForm">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <h4>LOGIN</h4>
+                        <hr />
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Log in" class="btn btn-default" />
+                            </div>
+                        </div>
+                        /*
+                    <p>
+                        @Html.ActionLink("Register as a new user", "Register")
+                    </p>
+                    @* Enable this once you have account confirmation enabled for password reset functionality
+                        <p>
+                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                        </p>
+            */
+
+
+
+            </section>
+        </div>
+
+    </div>
+*@
+@section Scripts {
+
+    <style>
+        .main-content {
+            width: 50%;
+            border-radius: 20px;
+            box-shadow: 0 5px 5px rgba(0,0,0,.4);
+            margin: 5em auto;
+            display: flex;
+        }
+
+        .company__info {
+            background-color: #008080;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #fff;
+        }
+
+        .fa-android {
+            font-size: 3em;
+        }
+
+        .row > h2 {
+            color: #008080;
+        }
+
+        .login_form {
+            background-color: #fff;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            border-top: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+        }
+
+        form {
+            padding: 0 2em;
+        }
+
+        .form__input {
+            width: 100%;
+            border: 0px solid transparent;
+            border-radius: 0;
+            border-bottom: 1px solid #aaa;
+            padding: 1em .5em .5em;
+            padding-left: 2em;
+            outline: none;
+            margin: 1.5em auto;
+            transition: all .5s ease;
+        }
+
+            .form__input:focus {
+                border-bottom-color: #008080;
+                box-shadow: 0 0 5px rgba(0,80,80,.4);
+                border-radius: 4px;
+            }
+
+        .btn {
+            transition: all .5s ease;
+            width: 70%;
+            border-radius: 30px;
+            color: #008080;
+            font-weight: 600;
+            background-color: #fff;
+            border: 1px solid #008080;
+            margin-top: 1.5em;
+            margin-bottom: 1em;
+        }
+
+            .btn:hover, .btn:focus {
+                background-color: #008080;
+                color: #fff;
+            }
+
+        .text-danger {
+            display: block;
+        }
+    </style>
+
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

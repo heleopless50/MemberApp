@@ -1,0 +1,140 @@
+﻿@model IEnumerable<MemberApp.Models.Member>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center" style="color:white;background-color:#333">View All Members</h2>
+<br />
+<p class="text-right">
+    @Html.ActionLink("Add New Member", "Create",new { },new { @class = " btn btn-primary" })
+</p>
+
+<br />
+
+
+
+
+
+
+
+
+<table class="table table-striped" id="MembersTable">
+    <thead class="thead-dark">
+        <tr style="background-color:#333;color:white;height:50px" class="text-center">
+
+            <th>
+                Member ID
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsMale)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Notes)
+            </th>
+
+            <th>
+                image
+            </th>
+            <th>Delete</th>
+        </tr>
+</thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @{ if (item.IsMale == true)
+                    {
+                        <i>male</i>
+                    }
+                    else
+                    {
+                        <i>female</i>
+                    }
+                }
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+
+            <td>
+                @{ var imgLink = "";
+
+                    if (item.PhotoPath != null && item.PhotoPath != "")
+                    { imgLink = item.PhotoPath.Substring(item.PhotoPath.IndexOf("\\imgs")); }
+                    else { imgLink = "\\content\\images\\placeholder.jpg"; }
+                }
+
+
+                <img class="profileImage" src="@imgLink" />
+            </td>
+
+
+
+
+            <td>
+
+                <a href="/Members/Delete/@item.Id">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="red" class="bi bi-person-x-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                </a>
+
+            </td>
+        </tr>
+
+        }
+    </tbody>
+
+</table>
+
+@section Scripts{
+    <style>
+        .profileImage {
+            max-width: 60px;
+            max-height: 60px;
+            border-radius: 50%;
+        }
+
+
+        tr, th {
+            text-align: center
+        }
+    </style>
+
+    
+    
+    }
